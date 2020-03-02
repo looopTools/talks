@@ -1,0 +1,25 @@
+\definecolor{AUblue}{rgb}{0.0, 0.37, 0.70} % AU Blue (primary)
+\setbeamertemplate{footline}[frame number]      
+\setbeamercolor{palette primary}{bg=AUblue,fg=white}
+
+\setbeamertemplate{footline}{%
+  \hspace{.5cm}
+%  \includegraphics[align=c, height=.5cm]{graphics/logos/aulogo_uk_var2_blue.eps}
+%  \hspace{1cm}
+  \includegraphics[align=c, height=1cm]{graphics/logos/scale_iot.eps}%
+  \hspace{1cm}
+  \includegraphics[align=c, height=1cm]{graphics/logos/netx_logo.png}%
+  \hfill%
+  \usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertframenumber\,/\,\inserttotalframenumber\kern1em%
+}
+
+\setbeamertemplate{frametitle}{\nointerlineskip  
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.75ex,dp=1.375ex]{frametitle}
+    \hspace*{2ex}\insertframetitle \hfill  \includegraphics[align=c, height=.5cm]{graphics/logos/aulogo_uk_var2_white.eps} \hspace*{1ex}%
+  \end{beamercolorbox}}      
+
+\setbeamercolor{alerted text}{%
+  fg=AUblue,
+}

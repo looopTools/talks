@@ -1,0 +1,527 @@
+#+TITLE: Introduction to Git
+#+AUTHOR: Lars Nielsen 
+
+#+OPTIONS: TeX:t LaTeX:t skip:nil d:nil toc:nil date:nil title:nil
+
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [table,svgnames,aspectratio=169]
+#+latex_header: \input{preamble}
+#+latex_header: \usepackage{xcolor}
+#+latex_header: \input{lstsettings}
+
+#+latex: \input{title_slide}
+
+* Agenda 
+TBW
+
+* Version Control System (VCS)
+
+*General*
+
+- Provides a common repository for code 
+- A system that lets you keep track of different version of file 
+- It allows for traceability 
+
+*Most* 
+
+- Enables collaboration 
+- Provide merging of files
+
+*Some* 
+
+- Fights collaboration 
+- Centralised
+- Distributed
+
+* VCS - Centralised 
+
+- There is one repository all works on 
+- It is often in a server 
+- Some requires file lock and release
+  + Some are even worse 
+
+* VCS - Decentralised 
+- Every computer has a repository 
+- *Most* sync to a common base 
+ 
+
+
+* Brief History 
+
+- Released in 2005 (so "young")
+- Create because according to "the git" all other VCS sucked 
+  + Especially CVS
+- Maintain Juni Hamano
+
+* Where to get git 
+
+*Linux*
+
+It should be in your package repository (if not switch distro). 
+
+
+*MacOS*
+
+Should be pre-installed. But is easier to mange with Homebrew 
+
+*Windows* 
+
+It can be downloaded straight from: https://git-scm.com/ 
+
+
+* Basic commands 
+
+There are 6 main commands in /git/ and it should be the only once you should need in the beginning. 
+
+- clone
+- add
+- commit 
+- push 
+- pull
+- status
+and /checkout/.
+
+* Basic Commands - Clone
+
+The /clone/ command is used for getting a copy of the repository 
+
+#+BEGIN_SRC bash
+git clone URI
+#+END_SRC
+
+- You get the full version history 
+- You get all current branches 
+
+* Basic Commands - Add and Commit 
+
+#+BEGIN_SRC bash 
+git add [params]
+git commit -m "MSG"
+#+END_SRC
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: 0.5
+   :BEAMER_opt: [t]
+   :END:
+*add*
+- adds \texttt{[params]} to a staging area 
+  + \texttt{.} \rightarrow add everything in folder
+  + \texttt{*} \rightarrow add all (just like BASH)
+  + \texttt{-u} \rightarrow add all files all ready tracked
+  + \texttt{dir} \rightarrow add content of the directory dir 
+  + \texttt{file name} \rightarrow add a file or files 
+
+
+
+** R
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :BEAMER_opt: [t]
+   :END:
+*commit*
+- Commits a your staging area to the repository history 
+- Takes a message 
+  + Make it a descriptive message 
+
+* Basic Commands - Pull and Push 
+
+#+BEGIN_SRC bash 
+git pull 
+git push 
+#+END_SRC
+
+** l                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: 0.5
+   :BEAMER_opt: [t]
+   :END:
+   *pull*
+   - Get the history in the base repository 
+   - Get the branches in the base repository 
+     + Depends on the base setup 
+
+** r                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: 0.5
+   :BEAMER_opt: [t]
+   :END:
+   *push*
+   - Push your changes to the base repo
+   - Distribute your changes to others 
+   
+* Basic Commands - Status
+
+  #+ATTR_LATEX: :width .75\textwidth :height 7cm
+  [[file:graphics/status.png]]
+
+* Branching 
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   - Separate your work 
+   - Do not break others code
+   - Segment releases
+   - All repos are 
+   - All repos has a master branch 
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   #+ATTR_LATEX: :width .75\textwidth
+   [[file:graphics/git-model.png]]
+
+* Working with branches 
+
+#+BEGIN_SRC bash
+git checkout -b NEW_BRANCH_NAME BASE_BRANCH
+...
+git push -U origin NEW_BRANCH_NAME
+#+END_SRC
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   #+ATTR_LATEX: :height 6cm
+   [[file:graphics/fb2x.png]]
+
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   - Create a branch 
+   - work in it, /add/, /commit/, /push/
+   - Ensures minimal interference from others
+   - Ensures you don't screw up
+
+
+* Working with branches 
+
+#+BEGIN_SRC bash
+git checkout BASE_BRANCH
+git merge NEW_BRANCH_NAME 
+git branch -d NEW_BRANCH_NAME 
+#+END_SRC
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   #+ATTR_LATEX: :height 6cm
+   [[file:graphics/fb2x.png]]
+
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   - Create a branch 
+   - work in it, /add/, /commit/, /push/
+   - Ensures minimal interference from others
+   - Ensures you don't screw up
+
+
+* Working with branches - the old Switcheroo
+
+Some time you may need to switch between branch. 
+
+#+BEGIN_SRC bash 
+git checkout BRANCH_NAME
+#+END_SRC
+
+* Working with branches - Git Flow
+
+#+BEGIN_CENTER
+[[https://nvie.com/posts/a-successful-git-branching-model/][https://nvie.com/posts/a-successful-git-branching-model/]]
+#+END_CENTER
+Git flow is a branching model
+
+* Tagging 
+
+- Semantic Versioning (not git) \rightarrow BUT AWESOME 
+- It is used for tagging a specific commit 
+- Used for traceability
+
+* Tagging - Semantic Versioning 
+
+- A versioning scheme 
+- Has three types of release 
+  + Major 
+  + Minor
+  + Hotfix 
+
+#+BEGIN_CENTER
+*MAJOR.MINOR.HOTFIX*
+#+END_CENTER
+
+* Tagging 
+
+- A tag is a "form of a commit"
+- We need to push tags 
+
+#+BEGIN_SRC bash
+git tag -a VERSION -m "MSG"
+git push --tag
+#+END_SRC
+
+- Easy to depend on externally 
+- Easy traceability
+  + You can keep a log of your changes 
+
+
+* Work flow
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   - A /master/ branch (stable)
+   - A /test/ branch (stable)
+   - A /developer/ branch (some what stable)
+   - /feature/ branches (unstable)
+   - /release/ branches (stable)
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   #+ATTR_LATEX: :width .75\textwidth
+   [[file:graphics/git-model.png]]
+
+
+* Pull Request 
+
+- A way to
+  + Comment on merges 
+  + Reject a merge
+  + Do code review 
+- Has different names
+  + Pull Request
+  + Merge request 
+  + Review request 
+
+* Hooks 
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+- Magic little "programs"
+- Fine grained control 
+- Can be annoying 
+- Placed in .git/hooks
+
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   #+ATTR_LATEX: :width .5\textwidth
+   [[file:graphics/hook.jpg]]
+
+
+* Hooks 
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .4
+   :END:
+   - "Altering" commands
+   - You can change before and after 
+   - Can be any scripting language you have an execution ENV for 
+
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .6
+   :END:
+   #+BEGIN_SRC bash 
+   if [ "$allownonascii" != "true" ] &&
+   test $(git diff --cached --name-only --diff-filter=A -z $against |
+   LC_ALL=C tr -d '[ -~]\0' | wc -c) != 0
+then
+	cat <<\EOF
+Error: ERROR MSG
+EOF
+	exit 1
+fi
+
+
+   #+END_SRC
+
+* Hooks - Types
+
+- Server Side
+  + pre-receive 
+    - linting 
+    - user verification 
+- Client Side 
+  + pre-commit
+    - linting 
+
+https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks
+
+* .gitingore 
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   #+BEGIN_SRC bash
+   filename.extension 
+   foldername/
+   entry*.extension
+   entry~
+   #+END_SRC
+
+
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   - Makes files ignored when added 
+   - can be added with /-f/
+   - used for keeping the repo clean 
+   - used for making the repo "safe"
+  
+* Git Config
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   - File called /.gitconfig/
+     + On macOS, BSD, and Linux in user root 
+   - Allows: 
+     + configuring name and email 
+     + setting editor 
+     + aliasing 
+     + setting push and pull style 
+     + and more 
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   #+BEGIN_SRC bash
+[push]
+	default = simple
+[user]
+	name = Lars Nielsen
+	email = lnc13.lars@gmail.com
+[alias]
+        ...
+        st = status
+        ps = push
+        pl = pull
+        cb = checkout -b
+        psu = push -u origin
+        ... 
+[core]
+	editor = emacs
+
+   #+END_SRC
+* Tools - Git Interactive 
+
+#+BEGIN_SRC bash
+git commit --interactive
+#+END_SRC
+
+#+ATTR_LATEX: :width \textwidth
+[[file:graphics/interactive.png]]
+
+* Tools - Online Repositories 
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .33
+   :END:
+   [[file:graphics/github.png]]
+   #+BEGIN_CENTER
+   www.github.com
+   #+END_CENTER
+** C                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .33
+   :END:
+   [[file:graphics/bitbucket.jpg]]
+   #+BEGIN_CENTER
+   www.bitbucket.com
+   #+END_CENTER
+
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .33
+   :END:
+   [[file:graphics/gitlab.png]]
+   #+BEGIN_CENTER
+   www.gitlab.com
+   #+END_CENTER
+
+
+* Tools - GUI / Mistakes 
+
+  #+ATTR_LATEX: :width .5\textwidth
+  [[file:graphics/github_desktop.jpg]]
+
+#+BEGIN_CENTER
+https://desktop.github.com/
+#+END_CENTER
+
+* Tools - Magit
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   [[file:graphics/magit.png]]
+
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   - Magit
+   - Emacs
+   - Marius Vollmer, Jonas Bernoulli, etc. 
+     
+   [[file:graphics/magit_status.png]]
+
+* References - Pro Git
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   #+ATTR_LATEX: :width .75\textwidth
+   [[file:graphics/progit2.png]]
+
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   Pro Git
+
+   Scott Chacon and Ben Straub 
+
+   Free: https://git-scm.com/book/en/v2
+
+   Physical by Apress
+  
+
+* References - Git Pocket Guide
+
+** L                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   Git Pocket Guide
+
+   Richard E. Silverman 
+
+   O'REILLY 
+
+** R                                                                  :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: .5
+   :END:
+   #+ATTR_LATEX: :height 6cm
+   [[file:graphics/pocket.jpg]]
